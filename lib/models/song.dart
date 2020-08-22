@@ -5,6 +5,7 @@ class Song {
   final String artist;
   final String artistImage;
   final String songPreviewLink;
+  final bool isPlaying = false;
 
   Song(
       {@required this.title,

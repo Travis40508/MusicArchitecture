@@ -50,4 +50,5 @@ class SongsViewModel extends ChangeNotifier {
       hasError = true;
     }
   }
+
 }
