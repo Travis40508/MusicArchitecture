@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:music_archiecture/screens/songs_view_model.dart';
 import 'package:music_archiecture/utils/strings.dart';
+import 'package:music_archiecture/widgets/music_error_widget.dart';
 import 'package:music_archiecture/widgets/loading_widget.dart';
 import 'package:music_archiecture/widgets/song_card.dart';
 import 'package:provider/provider.dart';
+import 'package:music_archiecture/widgets/music_error_widget.dart';
 
 class SongsScreen extends StatefulWidget {
   @override
@@ -33,7 +35,7 @@ class _SongsScreenState extends State<SongsScreen> {
       }
 
       if (viewModel.hasError) {
-
+        return MusicErrorWidget();
       }
 
       return ListView.builder(
