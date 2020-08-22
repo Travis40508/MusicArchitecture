@@ -6,5 +6,9 @@ class Song {
   final String artistImage;
   final String songPreviewLink;
 
-  Song({this.title, this.artist, this.artistImage, this.songPreviewLink});
+  Song(
+      {@required this.title,
+      @required this.artist,
+      @required this.artistImage,
+      @required this.songPreviewLink});
 }
