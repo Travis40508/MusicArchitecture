@@ -18,6 +18,11 @@ class App extends StatelessWidget {
           child: SongsScreen(),
         )
       },
+
+      theme: ThemeData(
+        primaryColor: Colors.blueAccent,
+        accentColor: Colors.white
+      ),
     );
   }
 }
