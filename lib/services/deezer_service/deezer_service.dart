@@ -32,9 +32,23 @@ class DeezerService implements MusicService {
   }
 
   @override
-  Future<List<Song>> searchSongs(String query) {
-    // TODO: implement searchSongs
-    throw UnimplementedError();
+  Future<List<Song>> searchSongs(String query) async {
+    final url = '$_baseUrl/search?q=$query';
+    final res = await _client.get(url);
+
+    if (HttpStatus.ok == res.statusCode) {
+      final json = jsonDecode(res.body);
+      final DeezerTracks tracks = DeezerTracks.fromJson(json);
+
+      return tracks.songs.map((deezerSong) => Song(
+          title: deezerSong.title,
+          artist: deezerSong.artist.name,
+          artistImage: deezerSong.artist.image,
+          songPreviewLink: deezerSong.songPreviewUrl
+      )).toList();
+    }
+
+    throw Exception('Http error - ${res.statusCode}');
   }
 
 }

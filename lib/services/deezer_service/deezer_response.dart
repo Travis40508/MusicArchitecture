@@ -1,17 +1,17 @@
 
 class DeezerResponse {
-  final Tracks _tracks;
+  final DeezerTracks _tracks;
   
   DeezerResponse.fromJson(Map<String, dynamic> json) :
-      _tracks = Tracks.fromJson(json['tracks']);
+      _tracks = DeezerTracks.fromJson(json['tracks']);
 
-  Tracks get tracks => _tracks;
+  DeezerTracks get tracks => _tracks;
 }
 
-class Tracks {
+class DeezerTracks {
   final List<DeezerSong> _songs;
 
-  Tracks.fromJson(Map<String, dynamic> json) :
+  DeezerTracks.fromJson(Map<String, dynamic> json) :
       _songs = (json['data'] as List).map((song) => DeezerSong.fromJson(song)).toList();
 
   List<DeezerSong> get songs => _songs;

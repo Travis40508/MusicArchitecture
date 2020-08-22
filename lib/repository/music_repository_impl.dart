@@ -17,8 +17,7 @@ class MusicRepositoryImpl implements MusicRepository {
 
   @override
   Future<List<Song>> searchSongs(String query) {
-    // TODO: implement searchSongs
-    throw UnimplementedError();
+    return musicService.searchSongs(query);
   }
 
 }
