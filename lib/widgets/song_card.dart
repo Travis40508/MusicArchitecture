@@ -2,6 +2,7 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/foundation.dart';
 import 'package:music_archiecture/models/song.dart';
+import 'package:music_archiecture/utils/constants.dart';
 
 class SongCard extends StatelessWidget {
   final Song song;
@@ -16,7 +17,7 @@ class SongCard extends StatelessWidget {
           elevation: 4.0,
           child: ClipRRect(
             borderRadius: BorderRadius.only(
-              topLeft: Radius.circular(40.0)
+              topLeft: Radius.circular(Constants.borderRadius)
             ),
             child: Image(
               image: CachedNetworkImageProvider(song.artistImage),

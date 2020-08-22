@@ -3,6 +3,7 @@ import 'package:music_archiecture/screens/songs_view_model.dart';
 import 'package:music_archiecture/utils/strings.dart';
 import 'package:music_archiecture/widgets/music_error_widget.dart';
 import 'package:music_archiecture/widgets/loading_widget.dart';
+import 'package:music_archiecture/widgets/search_bar.dart';
 import 'package:music_archiecture/widgets/song_card.dart';
 import 'package:provider/provider.dart';
 
@@ -16,7 +17,12 @@ class _SongsScreenState extends State<SongsScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: _appBar,
-      body: _songList,
+      body: Column(
+        children: <Widget>[
+          _searchBar,
+          _songList
+        ],
+      ),
     );
   }
 
@@ -25,6 +31,8 @@ class _SongsScreenState extends State<SongsScreen> {
         title: Text(Strings.songsScreenTitle),
         backgroundColor: Theme.of(context).primaryColor,
       );
+
+  get _searchBar => SearchBar(onChanged: (query) => print(query),);
 
   get _songList => Consumer<SongsViewModel>(
         builder: (_, viewModel, __) {
@@ -36,17 +44,20 @@ class _SongsScreenState extends State<SongsScreen> {
             return MusicErrorWidget();
           }
 
-          return GridView.builder(
-            itemCount: viewModel.songs.length,
-            gridDelegate:
-                SliverGridDelegateWithFixedCrossAxisCount(crossAxisCount: 2),
-            itemBuilder: (_, index) {
-              final song = viewModel.songs[index];
+          return Expanded(
+            child: GridView.builder(
+              shrinkWrap: true,
+              itemCount: viewModel.songs.length,
+              gridDelegate:
+                  SliverGridDelegateWithFixedCrossAxisCount(crossAxisCount: 2),
+              itemBuilder: (_, index) {
+                final song = viewModel.songs[index];
 
-              return SongCard(
-                song: song,
-              );
-            },
+                return SongCard(
+                  song: song,
+                );
+              },
+            ),
           );
         },
       );
