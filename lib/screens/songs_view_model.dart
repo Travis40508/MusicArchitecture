@@ -1,11 +1,25 @@
-
 import 'package:flutter/material.dart';
 import 'package:music_archiecture/models/song.dart';
 import 'package:music_archiecture/repository/music_repository.dart';
 import 'package:flutter/foundation.dart';
+import 'package:music_archiecture/utils/strings.dart';
+import 'package:rxdart/rxdart.dart';
 
 class SongsViewModel extends ChangeNotifier {
   final MusicRepository musicRepository;
+
+  List<Song> _topSongsCache = <Song>[];
+  BehaviorSubject<String> _songQuery = BehaviorSubject();
+  Stream<String> get _songQueryStream => _songQuery.stream;
+
+  String _title = Strings.songsScreenTitle;
+  String get title => _title;
+
+  set title(String value) {
+    _title = value;
+
+    notifyListeners();
+  }
 
   List<Song> _songs = <Song>[];
   List<Song> get songs => _songs;
@@ -33,6 +47,29 @@ class SongsViewModel extends ChangeNotifier {
 
   SongsViewModel({@required this.musicRepository}) {
     _fetchTopSongs();
+    _listenForSearch();
+  }
+
+  @override
+  void dispose() {
+    _songQuery.close();
+    super.dispose();
+  }
+
+  void _listenForSearch() {
+    _songQueryStream
+        .debounceTime(Duration(milliseconds: 500))
+        .flatMap(
+            (query) => Stream.fromFuture(musicRepository.searchSongs(query)))
+        .listen((songs) {
+      isLoading = false;
+      hasError = false;
+      this.songs = songs;
+    }, onError: (e) {
+      print('$e');
+      isLoading = false;
+      hasError = false;
+    });
   }
 
   void _fetchTopSongs() async {
@@ -40,10 +77,12 @@ class SongsViewModel extends ChangeNotifier {
       final topSongs = await musicRepository.fetchTopSongs();
 
       if (topSongs.isNotEmpty) {
+        _topSongsCache.addAll(topSongs);
         isLoading = false;
+        hasError = false;
         songs = topSongs;
       }
-    } catch(e) {
+    } catch (e) {
       ///Normally we'd do more here
       print('$e');
       isLoading = false;
@@ -51,4 +90,15 @@ class SongsViewModel extends ChangeNotifier {
     }
   }
 
+  void onSearchChanged({@required String query}) {
+    if (query.isEmpty && _topSongsCache.isNotEmpty) {
+      title = Strings.songsScreenTitle;
+      songs = _topSongsCache;
+
+      return;
+    }
+
+    title = "Showing Results for '$query'";
+    _songQuery.add(query);
+  }
 }

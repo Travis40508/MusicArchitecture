@@ -13,52 +13,59 @@ class SongsScreen extends StatefulWidget {
 }
 
 class _SongsScreenState extends State<SongsScreen> {
+  final _controller = TextEditingController();
+
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: _appBar,
-      body: Column(
-        children: <Widget>[
-          _searchBar,
-          _songList
-        ],
-      ),
-    );
+    return _screenContent;
   }
 
-  get _appBar => AppBar(
+  Widget _fetchAppBar({@required String title}) => AppBar(
         centerTitle: true,
-        title: Text(Strings.songsScreenTitle),
+        title: Text(title),
         backgroundColor: Theme.of(context).primaryColor,
       );
 
-  get _searchBar => SearchBar(onChanged: (query) => print(query),);
-
-  get _songList => Consumer<SongsViewModel>(
+  get _screenContent => Consumer<SongsViewModel>(
         builder: (_, viewModel, __) {
-          if (viewModel.isLoading) {
-            return LoadingWidget();
-          }
 
-          if (viewModel.hasError) {
-            return MusicErrorWidget();
-          }
+          return Scaffold(
+            appBar: _fetchAppBar(title: viewModel.title),
+            body: Builder(builder: (context) {
+              if (viewModel.isLoading) {
+                return LoadingWidget();
+              }
 
-          return Expanded(
-            child: GridView.builder(
-              shrinkWrap: true,
-              itemCount: viewModel.songs.length,
-              gridDelegate:
-                  SliverGridDelegateWithFixedCrossAxisCount(crossAxisCount: 2),
-              itemBuilder: (_, index) {
-                final song = viewModel.songs[index];
+              if (viewModel.hasError) {
+                return MusicErrorWidget();
+              }
 
-                return SongCard(
-                  song: song,
-                );
-              },
-            ),
+              return Column(
+                children: <Widget>[
+                  SearchBar(
+                    onChanged: (query) => viewModel.onSearchChanged(query: query),
+                    controller: _controller,
+                  ),
+                  Expanded(
+                    child: GridView.builder(
+                      shrinkWrap: true,
+                      itemCount: viewModel.songs.length,
+                      gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                          crossAxisCount: 2),
+                      itemBuilder: (_, index) {
+                        final song = viewModel.songs[index];
+
+                        return SongCard(
+                          song: song,
+                        );
+                      },
+                    ),
+                  ),
+                ],
+              );
+            }),
           );
+
         },
       );
 }
