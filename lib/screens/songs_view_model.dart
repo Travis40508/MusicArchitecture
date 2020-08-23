@@ -52,8 +52,8 @@ class SongsViewModel extends ChangeNotifier {
 
   @override
   void dispose() {
-    _songQuery.close();
     super.dispose();
+    _songQuery.close();
   }
 
   void _listenForSearch() {
@@ -91,7 +91,7 @@ class SongsViewModel extends ChangeNotifier {
   }
 
   void onSearchChanged({@required String query}) {
-    if (query.isEmpty && _topSongsCache.isNotEmpty) {
+    if (query.isEmpty) {
       title = Strings.songsScreenTitle;
       songs = _topSongsCache;
 
