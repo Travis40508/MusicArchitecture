@@ -69,7 +69,7 @@ class SongsViewModel extends ChangeNotifier {
     }, onError: (e) {
       print('$e');
       isLoading = false;
-      hasError = false;
+      hasError = true;
     });
   }
 
