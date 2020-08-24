@@ -7,6 +7,7 @@ import 'package:rxdart/rxdart.dart';
 
 class SongsViewModel extends ChangeNotifier {
   final MusicRepository musicRepository;
+  final int searchDelay;
 
   List<Song> _topSongsCache = <Song>[];
   BehaviorSubject<String> _songQuery = BehaviorSubject();
@@ -45,7 +46,7 @@ class SongsViewModel extends ChangeNotifier {
     notifyListeners();
   }
 
-  SongsViewModel({@required this.musicRepository}) {
+  SongsViewModel({@required this.musicRepository, this.searchDelay = 500}) {
     _fetchTopSongs();
     _listenForSearch();
   }
@@ -58,7 +59,7 @@ class SongsViewModel extends ChangeNotifier {
 
   void _listenForSearch() {
     _songQueryStream
-        .debounceTime(Duration(milliseconds: 500))
+        .debounceTime(Duration(milliseconds: searchDelay))
         .flatMap(
             (query) => Stream.fromFuture(musicRepository.searchSongs(query)))
         .listen((songs) {
