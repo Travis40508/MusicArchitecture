@@ -17,8 +17,7 @@ class SongCard extends StatelessWidget {
           elevation: 4.0,
           child: ClipRRect(
             borderRadius: BorderRadius.only(
-              topLeft: Radius.circular(Constants.borderRadius)
-            ),
+                topLeft: Radius.circular(Constants.borderRadius)),
             child: Image(
               image: CachedNetworkImageProvider(song.artistImage),
             ),
