@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:music_archiecture/screens/preview_screen/preview_screen.dart';
 import 'package:music_archiecture/screens/songs_screen/songs_view_model.dart';
 import 'package:music_archiecture/widgets/music_error_widget.dart';
 import 'package:music_archiecture/widgets/loading_widget.dart';
@@ -27,7 +28,6 @@ class _SongsScreenState extends State<SongsScreen> {
 
   get _screenContent => Consumer<SongsViewModel>(
         builder: (_, viewModel, __) {
-
           return Scaffold(
             appBar: _fetchAppBar(title: viewModel.title),
             body: Builder(builder: (context) {
@@ -42,7 +42,8 @@ class _SongsScreenState extends State<SongsScreen> {
               return Column(
                 children: <Widget>[
                   SearchBar(
-                    onChanged: (query) => viewModel.onSearchChanged(query: query),
+                    onChanged: (query) =>
+                        viewModel.onSearchChanged(query: query),
                     controller: _controller,
                   ),
                   Expanded(
@@ -54,8 +55,12 @@ class _SongsScreenState extends State<SongsScreen> {
                       itemBuilder: (_, index) {
                         final song = viewModel.songs[index];
 
-                        return SongCard(
-                          song: song,
+                        return InkWell(
+                          onTap: () => Navigator.pushNamed(context, '/preview',
+                              arguments: PreviewScreenArguments(song: song)),
+                          child: SongCard(
+                            song: song,
+                          ),
                         );
                       },
                     ),
@@ -64,7 +69,6 @@ class _SongsScreenState extends State<SongsScreen> {
               );
             }),
           );
-
         },
       );
 }

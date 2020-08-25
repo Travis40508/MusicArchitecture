@@ -99,8 +99,8 @@ void main() {
     when(_repository.searchSongs(any)).thenAnswer((_) => Future.value(_searchedSongs));
     _viewModel = SongsViewModel(musicRepository: _repository, searchDelay: 0);
     final widget = MaterialApp(
-      home: ChangeNotifierProvider(
-        create: (_) => _viewModel,
+      home: ChangeNotifierProvider.value(
+        value: _viewModel,
         child: SongsScreen(),
       ),
     );

@@ -18,8 +18,11 @@ class SongCard extends StatelessWidget {
           child: ClipRRect(
             borderRadius: BorderRadius.only(
                 topLeft: Radius.circular(Constants.borderRadius)),
-            child: Image(
-              image: CachedNetworkImageProvider(song.artistImage),
+            child: Hero(
+              tag: song.songPreviewLink,
+              child: Image(
+                image: CachedNetworkImageProvider(song.artistImage),
+              ),
             ),
           ),
         ),
