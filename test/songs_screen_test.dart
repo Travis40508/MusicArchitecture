@@ -14,16 +14,19 @@ void main() {
 
    final _topSongs = <Song>[
     Song(
+        id: 1,
         artist: 'test1',
         artistImage: 'image1',
         songPreviewLink: 'link1',
         title: 'title1'),
     Song(
+        id: 2,
         artist: 'test2',
         artistImage: 'image2',
         songPreviewLink: 'link2',
         title: 'title2'),
     Song(
+        id: 3,
         artist: 'test3',
         artistImage: 'image3',
         songPreviewLink: 'link3',
@@ -32,16 +35,19 @@ void main() {
 
    final _searchedSongs = <Song>[
     Song(
+        id: 4,
         artist: 'test4',
         artistImage: 'image4',
         songPreviewLink: 'link4',
         title: 'title4'),
     Song(
+        id: 5,
         artist: 'test5',
         artistImage: 'image5',
         songPreviewLink: 'link5',
         title: 'title5'),
     Song(
+        id: 6,
         artist: 'test6',
         artistImage: 'image6',
         songPreviewLink: 'link6',

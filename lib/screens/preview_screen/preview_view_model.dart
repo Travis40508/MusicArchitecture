@@ -2,13 +2,16 @@
 import 'package:flutter/material.dart';
 import 'package:music_archiecture/models/song.dart';
 import 'package:flutter/foundation.dart';
+import 'package:music_archiecture/repository/music_repository.dart';
 
 class PreviewViewModel extends ChangeNotifier {
 
   final Song song;
+  final MusicRepository repository;
 
-  PreviewViewModel({@required this.song}) {
+  PreviewViewModel({@required this.repository, @required this.song}) {
     _registerSong(song: song);
+    _fetchSongLyrics(song: song);
   }
 
   String _title = 'Preview';
@@ -46,6 +49,14 @@ class PreviewViewModel extends ChangeNotifier {
     notifyListeners();
   }
 
+  String _lyrics = '';
+  String get lyrics => _lyrics;
+  set lyrics(String value) {
+    _lyrics = value;
+
+    notifyListeners();
+  }
+
   void _registerSong({@required Song song}) {
     title = song.title;
     imageUrl = song.artistImage;
@@ -54,5 +65,15 @@ class PreviewViewModel extends ChangeNotifier {
 
   void changeSongState() {
     isPlaying = !isPlaying;
+  }
+
+  void _fetchSongLyrics({@required Song song}) async {
+    try {
+      final lyrics = await repository.fetchLyrics(song.artist, song.title);
+      this.lyrics = lyrics;
+    } catch(e) {
+      print('Error -$e');
+      lyrics = 'No Lyrics Found - Bummer :(';
+    }
   }
 }

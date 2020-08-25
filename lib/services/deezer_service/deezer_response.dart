@@ -18,14 +18,19 @@ class DeezerTracks {
 }
 
 class DeezerSong {
+  final int _id;
   final String _title;
   final DeezerArtist _artist;
   final String _songPreviewUrl;
 
   DeezerSong.fromJson(Map<String, dynamic> json) :
+      _id = json['id'],
       _title = json['title'],
       _artist = DeezerArtist.fromJson(json['artist']),
       _songPreviewUrl = json['preview'];
+
+
+  int get id => _id;
 
   String get songPreviewUrl => _songPreviewUrl;
 

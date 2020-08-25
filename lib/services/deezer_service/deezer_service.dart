@@ -21,6 +21,7 @@ class DeezerService implements MusicService {
       final DeezerResponse deezerResponse = DeezerResponse.fromJson(json);
 
       return deezerResponse.tracks.songs.map((deezerSong) => Song(
+        id: deezerSong.id,
         title: deezerSong.title,
         artist: deezerSong.artist.name,
         artistImage: deezerSong.artist.image,
@@ -41,6 +42,7 @@ class DeezerService implements MusicService {
       final DeezerTracks tracks = DeezerTracks.fromJson(json);
 
       return tracks.songs.map((deezerSong) => Song(
+          id: deezerSong.id,
           title: deezerSong.title,
           artist: deezerSong.artist.name,
           artistImage: deezerSong.artist.image,

@@ -4,6 +4,7 @@ import 'package:music_archiecture/app.dart';
 import 'package:music_archiecture/repository/music_repository.dart';
 import 'package:music_archiecture/repository/music_repository_impl.dart';
 import 'package:music_archiecture/services/deezer_service/deezer_service.dart';
+import 'package:music_archiecture/services/orion_service/orion_lyrics_service.dart';
 
 final serviceLocator = GetIt.instance;
 
@@ -13,6 +14,7 @@ void main() {
 }
 
 void _buildDependencyGraph() {
-  serviceLocator.registerLazySingleton<MusicRepository>(
-      () => MusicRepositoryImpl(musicService: DeezerService()));
+  serviceLocator.registerLazySingleton<MusicRepository>(() =>
+      MusicRepositoryImpl(
+          musicService: DeezerService(), lyricsService: OrionLyricsService()));
 }

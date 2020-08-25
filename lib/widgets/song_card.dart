@@ -19,7 +19,7 @@ class SongCard extends StatelessWidget {
             borderRadius: BorderRadius.only(
                 topLeft: Radius.circular(Constants.borderRadius)),
             child: Hero(
-              tag: song.songPreviewLink,
+              tag: song.id,
               child: Image(
                 image: CachedNetworkImageProvider(song.artistImage),
               ),
