@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:music_archiecture/screens/songs_view_model.dart';
-import 'package:music_archiecture/utils/strings.dart';
+import 'package:music_archiecture/screens/songs_screen/songs_view_model.dart';
 import 'package:music_archiecture/widgets/music_error_widget.dart';
 import 'package:music_archiecture/widgets/loading_widget.dart';
 import 'package:music_archiecture/widgets/search_bar.dart';

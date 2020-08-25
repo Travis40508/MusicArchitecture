@@ -3,8 +3,8 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:mockito/mockito.dart';
 import 'package:music_archiecture/models/song.dart';
 import 'package:music_archiecture/repository/music_repository.dart';
-import 'package:music_archiecture/screens/songs_screen.dart';
-import 'package:music_archiecture/screens/songs_view_model.dart';
+import 'package:music_archiecture/screens/songs_screen/songs_screen.dart';
+import 'package:music_archiecture/screens/songs_screen/songs_view_model.dart';
 import 'package:provider/provider.dart';
 import 'mocks/mock_repository.dart';
 

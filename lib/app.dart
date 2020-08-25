@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:music_archiecture/main.dart';
 import 'package:music_archiecture/repository/music_repository.dart';
-import 'package:music_archiecture/screens/songs_screen.dart';
-import 'package:music_archiecture/screens/songs_view_model.dart';
+import 'package:music_archiecture/screens/songs_screen/songs_screen.dart';
+import 'package:music_archiecture/screens/songs_screen/songs_view_model.dart';
 import 'package:provider/provider.dart';
 
 class App extends StatelessWidget {
