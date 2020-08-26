@@ -21,7 +21,7 @@ class SongCard extends StatelessWidget {
             child: Hero(
               tag: song.id,
               child: Image(
-                image: CachedNetworkImageProvider(song.artistImage),
+                image: CachedNetworkImageProvider(song.albumImage),
               ),
             ),
           ),

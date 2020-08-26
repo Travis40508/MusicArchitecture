@@ -21,12 +21,14 @@ class DeezerSong {
   final int _id;
   final String _title;
   final DeezerArtist _artist;
+  final DeezerAlbum _album;
   final String _songPreviewUrl;
 
   DeezerSong.fromJson(Map<String, dynamic> json) :
       _id = json['id'],
       _title = json['title'],
       _artist = DeezerArtist.fromJson(json['artist']),
+      _album = DeezerAlbum.fromJson(json['album']),
       _songPreviewUrl = json['preview'];
 
 
@@ -35,6 +37,8 @@ class DeezerSong {
   String get songPreviewUrl => _songPreviewUrl;
 
   DeezerArtist get artist => _artist;
+
+  DeezerAlbum get album => _album;
 
   String get title => _title;
 }
@@ -50,4 +54,21 @@ class DeezerArtist {
   String get image => _image;
 
   String get name => _name;
+}
+
+class DeezerAlbum {
+  final int _id;
+  final String _title;
+  final String _imageUrl;
+
+  DeezerAlbum.fromJson(Map<String, dynamic> json) :
+      _id = json['id'],
+      _title = json['title'],
+      _imageUrl = json['cover_medium'];
+
+  String get imageUrl => _imageUrl;
+
+  String get title => _title;
+
+  int get id => _id;
 }

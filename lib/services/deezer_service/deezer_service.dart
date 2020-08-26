@@ -24,7 +24,7 @@ class DeezerService implements MusicService {
         id: deezerSong.id,
         title: deezerSong.title,
         artist: deezerSong.artist.name,
-        artistImage: deezerSong.artist.image,
+        albumImage: deezerSong.album.imageUrl,
         songPreviewLink: deezerSong.songPreviewUrl
       )).toList();
     }
@@ -45,7 +45,7 @@ class DeezerService implements MusicService {
           id: deezerSong.id,
           title: deezerSong.title,
           artist: deezerSong.artist.name,
-          artistImage: deezerSong.artist.image,
+          albumImage: deezerSong.album.imageUrl,
           songPreviewLink: deezerSong.songPreviewUrl
       )).toList();
     }

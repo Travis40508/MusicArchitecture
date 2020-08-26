@@ -59,7 +59,7 @@ class PreviewViewModel extends ChangeNotifier {
 
   void _registerSong({@required Song song}) {
     title = song.title;
-    imageUrl = song.artistImage;
+    imageUrl = song.albumImage;
     songPreview = song.songPreviewLink;
   }
 
