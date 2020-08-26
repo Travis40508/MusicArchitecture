@@ -34,6 +34,7 @@ class _PreviewScreenState extends State<PreviewScreen> {
       child: Consumer<PreviewViewModel>(
         builder: (_, viewModel, __) {
           return Scaffold(
+            backgroundColor: Theme.of(context).primaryColor,
             appBar: AppBar(
               centerTitle: true,
               title: Text(viewModel.title),
@@ -86,7 +87,7 @@ class _PreviewScreenState extends State<PreviewScreen> {
                     shrinkWrap: true,
                     children: [
                       Card(
-                        color: Theme.of(context).primaryColor,
+                        color: Theme.of(context).accentColor,
                         elevation: 4.0,
                         child: Padding(
                           padding: const EdgeInsets.all(8.0),
@@ -94,7 +95,7 @@ class _PreviewScreenState extends State<PreviewScreen> {
                             _viewModel.lyrics,
                             textAlign: TextAlign.center,
                             style: TextStyle(
-                              color: Theme.of(context).accentColor,
+                              color: Theme.of(context).primaryColor,
                               fontWeight: FontWeight.bold
                             ),
                           ),
