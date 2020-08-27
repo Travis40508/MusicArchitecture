@@ -1,4 +1,5 @@
 
+import 'package:audioplayers/audioplayers.dart';
 import 'package:flutter/material.dart';
 import 'package:music_archiecture/models/song.dart';
 import 'package:flutter/foundation.dart';
@@ -74,6 +75,12 @@ class PreviewViewModel extends ChangeNotifier {
     } catch(e) {
       print('Error -$e');
       lyrics = 'No Lyrics Found - Bummer :(';
+    }
+  }
+
+  void onPlayerStateChanged(AudioPlayerState state) {
+    if (state == AudioPlayerState.COMPLETED && isPlaying) {
+      changeSongState();
     }
   }
 }
