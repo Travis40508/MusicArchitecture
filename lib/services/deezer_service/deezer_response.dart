@@ -44,14 +44,18 @@ class DeezerSong {
 }
 
 class DeezerArtist {
+  final int _id;
   final String _name;
   final String _image;
 
   DeezerArtist.fromJson(Map<String, dynamic> json) :
+      _id = json['id'],
       _name = json['name'],
       _image = json['picture_medium'];
 
   String get image => _image;
+
+  int get id => _id;
 
   String get name => _name;
 }

@@ -27,4 +27,9 @@ class MusicRepositoryImpl implements MusicRepository {
     return lyricsService.fetchLyrics(artistName, songTitle);
   }
 
+  @override
+  Future<List<Song>> fetchOtherArtistSongs({@required int artistId}) {
+    return musicService.fetchArtistTracks(id: artistId);
+  }
+
 }

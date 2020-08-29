@@ -53,4 +53,24 @@ class DeezerService implements MusicService {
     throw Exception('Http error - ${res.statusCode}');
   }
 
+  @override
+  Future<List<Song>> fetchArtistTracks({int id}) async {
+    final url = '$_baseUrl/artist/$id/top?limit=12';
+    final res = await _client.get(url);
+
+    if (HttpStatus.ok == res.statusCode) {
+      final json = jsonDecode(res.body);
+      final DeezerTracks tracks = DeezerTracks.fromJson(json);
+
+      return tracks.songs.map((deezerSong) => Song(
+          id: deezerSong.id,
+          title: deezerSong.title,
+          artist: deezerSong.artist.name,
+          albumImage: deezerSong.album.imageUrl,
+          songPreviewLink: deezerSong.songPreviewUrl
+      )).toList();
+    }
+
+    throw Exception('Http error - ${res.statusCode}');
+    }
 }
